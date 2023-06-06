@@ -1,6 +1,5 @@
-
 alert("Primera parte");
-alert("Suma todos los numero que hay desde 1 a N");
+alert("Suma todos los números que hay desde 1 hasta N");
 
 var num = parseInt(prompt("Ingrese el número N:"));
 
@@ -21,14 +20,14 @@ function sumahastaN(num) {
 
 sumahastaN(num);
 
-alert("Segunda Parte ");
-alert("Características de de un numero ");
+alert("Segunda Parte");
+alert("Características de un número");
 var x = parseInt(prompt("Ingrese un número: "));
 
 var numero = {
     valor: x,
     verificarCaracteristicas: function () {
-        // Agrege los case para complicarme la vida.
+        // Agregué los case para complicarme la vida.
         switch (true) {
             case this.esPar():
                 alert("El valor es par");
@@ -75,7 +74,7 @@ var numero = {
 numero.verificarCaracteristicas();
 
 numero.esPar();
-alert("x es un numero perfecto: " + numero.esPerfecto());
+alert("x es un número perfecto: " + numero.esPerfecto());
 alert("x es un número primo: " + numero.esPrimo());
 
 function calcularCuotas(cantidad, interes) {
@@ -92,8 +91,8 @@ function calcularCuotas(cantidad, interes) {
 
     return resultados;
 }
-alert("Tercera Parte ");
-alert("Calculadora de Interes ");
+alert("Tercera Parte");
+alert("Calculadora de Interés");
 var cantidad = parseFloat(prompt("Ingrese la cantidad de dinero:"));
 var interes = parseFloat(prompt("Ingrese el porcentaje de interés:"));
 
@@ -134,8 +133,8 @@ alert("Saldo en cuotas:");
 for (var key in cuotas) {
     alert(key + " cuotas: $" + cuotas[key].valor + " Total " + cuotas[key].total);
 }
-alert("Cuarta parte ");
-alert("Promedio de un Estudiante ");
+alert("Cuarta parte");
+alert("Promedio de un Estudiante");
 function crearEstudiante() {
     class Estudiante {
         constructor(nombre, apellido, notas) {
@@ -171,8 +170,11 @@ function crearEstudiante() {
         estudiante.apellido
     );
     alert("Promedio de notas: " + estudiante.calcularPromedio());
-    if(estudiante.calcularPromedio() > 4){
-        alert("!!!! Felicidades : " + estudiante.nombre +" " + estudiante.apellido +" " + "estas aprobado !!!!");
+    if (estudiante.calcularPromedio() > 4) {
+        alert("¡¡¡Felicidades: " + estudiante.nombre + " " + estudiante.apellido + ", estás aprobado!!!");
+    }else {
+        alert("Lo lamento: " + estudiante.nombre + " " + estudiante.apellido + ", estás desaprobado :,c. ¡Suerte para la próxima!");
+
     }
 }
 
