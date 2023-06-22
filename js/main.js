@@ -1,97 +1,15 @@
-alert("Primera parte");
-alert("Suma todos los números que hay desde 1 hasta N");
-
-var num = parseInt(prompt("Ingrese el número N:"));
-
-function sumahastaN(num) {
-    if (num <= 0 || isNaN(num)) {
-        alert("Por favor ingrese números positivos.");
-    } else {
-        var suma = 0;
-        for (var i = 1; i <= num; i++) {
-            suma += i;
-        }
-        alert("El valor es " + suma);
-        // Carl Friedrich Gauss también conocido como el príncipe de las matemáticas inventó la fórmula ((x*(1+x))/2) cuando tenía 8 años y
-        // es otra forma de resolver este tipo de ejercicio.
-        alert("El valor es " + (num * (1 + num)) / 2 + " Por Gauss");
-    }
-}
-
-sumahastaN(num);
-
-alert("Segunda Parte");
-alert("Características de un número");
-var x = parseInt(prompt("Ingrese un número: "));
-
-var numero = {
-    valor: x,
-    verificarCaracteristicas: function () {
-        // Agregué los case para complicarme la vida.
-        switch (true) {
-            case this.esPar():
-                alert("El valor es par");
-                break;
-            case this.esPrimo():
-                alert("El valor es primo");
-                break;
-            case this.esPerfecto():
-                alert("El valor es un número perfecto");
-                break;
-            default:
-                alert("El valor no tiene características especiales");
-                break;
-        }
-    },
-    esPar: function () {
-        return this.valor % 2 === 0;
-    },
-    esPrimo: function () {
-        var esPrimo = true;
-        if (this.valor <= 1) {
-            esPrimo = false;
-        } else {
-            for (var i = 2; i <= Math.sqrt(this.valor); i++) {
-                if (this.valor % i === 0) {
-                    esPrimo = false;
-                    break;
-                }
-            }
-        }
-        return esPrimo;
-    },
-    esPerfecto: function () {
-        var sumaDivisores = 0;
-        for (var i = 1; i < this.valor; i++) {
-            if (this.valor % i === 0) {
-                sumaDivisores += i;
-            }
-        }
-        return sumaDivisores === this.valor;
-    },
-};
-
-numero.verificarCaracteristicas();
-
-numero.esPar();
-alert("x es un número perfecto: " + numero.esPerfecto());
-alert("x es un número primo: " + numero.esPrimo());
-
 function calcularCuotas(cantidad, interes) {
     var saldoTotal = cantidad * (1 + interes / 100);
 
     var cuotas = [2, 3, 4, 6, 8, 12, 24];
-    var resultados = [];
-
-    for (var i = 0; i < cuotas.length; i++) {
-        var cuota = cuotas[i];
+    var resultados = cuotas.map(function(cuota) {
         var saldoCuota = saldoTotal / cuota;
-        resultados.push(saldoCuota.toFixed(2));
-    }
+        return saldoCuota.toFixed(2);
+    });
 
     return resultados;
 }
-alert("Tercera Parte");
+
 alert("Calculadora de Interés");
 var cantidad = parseFloat(prompt("Ingrese la cantidad de dinero:"));
 var interes = parseFloat(prompt("Ingrese el porcentaje de interés:"));
@@ -133,8 +51,10 @@ alert("Saldo en cuotas:");
 for (var key in cuotas) {
     alert(key + " cuotas: $" + cuotas[key].valor + " Total " + cuotas[key].total);
 }
+
 alert("Cuarta parte");
 alert("Promedio de un Estudiante");
+
 function crearEstudiante() {
     class Estudiante {
         constructor(nombre, apellido, notas) {
@@ -144,10 +64,9 @@ function crearEstudiante() {
         }
 
         calcularPromedio() {
-            let suma = 0;
-            for (let i = 0; i < this.notas.length; i++) {
-                suma += this.notas[i];
-            }
+            let suma = this.notas.reduce(function(acumulador, nota) {
+                return acumulador + nota;
+            }, 0);
             return suma / this.notas.length;
         }
     }
@@ -171,11 +90,83 @@ function crearEstudiante() {
     );
     alert("Promedio de notas: " + estudiante.calcularPromedio());
     if (estudiante.calcularPromedio() > 4) {
-        alert("¡¡¡Felicidades: " + estudiante.nombre + " " + estudiante.apellido + ", estás aprobado!!!");
-    }else {
-        alert("Lo lamento: " + estudiante.nombre + " " + estudiante.apellido + ", estás desaprobado :,c. ¡Suerte para la próxima!");
-
+        alert(
+            "¡¡¡Felicidades: " +
+            estudiante.nombre +
+            " " +
+            estudiante.apellido +
+            ", estás aprobado!!!"
+        );
+    } else {
+        alert(
+            "Lo lamento: " +
+            estudiante.nombre +
+            " " +
+            estudiante.apellido +
+            ", estás desaprobado :,c. ¡Suerte para la próxima!"
+        );
     }
 }
 
 crearEstudiante();
+
+let grupo = [
+    { nombre: "Juan", sexo: "Mas" },
+    { nombre: "María", sexo: "Fem" },
+    { nombre: "Pedro", sexo: "Mas" },
+    { nombre: "Daniel", sexo: "Mas" },
+];
+
+function verificarUsuario(nombre) {
+    return grupo.some(function(usuario) {
+        return usuario.nombre.toLowerCase() === nombre.toLowerCase();
+    });
+}
+
+function registrarUsuario(nombre, sexo) {
+    grupo.push({ nombre, sexo });
+    alert("¡Te has registrado exitosamente!");
+}
+
+function interactuar() {
+    const opcion = prompt("¿Eres un usuario registrado? (Sí/No)").toLowerCase();
+
+    if (opcion === "si") {
+        const nombre = prompt("Por favor, ingresa tu nombre");
+        const sexo = prompt("Por favor, ingresa tu sexo (Mas/Fem)");
+
+        if (verificarUsuario(nombre)) {
+            alert(
+                "¡Bienvenido/a de nuevo, " +
+                nombre +
+                "! Estás registrado/a en el grupo."
+            );
+        } else {
+            alert("Lo siento, no estás registrado/a en el grupo.");
+        }
+    } else if (opcion === "no") {
+        const nombre = prompt("Por favor, ingresa tu nombre");
+        const sexo = prompt("Por favor, ingresa tu sexo (Mas/Fem)");
+
+        registrarUsuario(nombre, sexo);
+        alert("¡Te has registrado exitosamente!");
+    }
+}
+
+interactuar();
+
+const usuariosMasculinos = grupo.filter(function(usuario) {
+    return usuario.sexo.toLowerCase() === "mas";
+});
+alert("Usuarios masculinos:");
+usuariosMasculinos.forEach(function(usuario) {
+    alert("Nombre: " + usuario.nombre + ", Sexo: " + usuario.sexo);
+});
+
+const usuariosFemeninos = grupo.filter(function(usuario) {
+    return usuario.sexo.toLowerCase() === "fem";
+});
+alert("Usuarios femeninos:");
+usuariosFemeninos.forEach(function(usuario) {
+    alert("Nombre: " + usuario.nombre + ", Sexo: " + usuario.sexo);
+});
